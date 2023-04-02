@@ -1,15 +1,21 @@
 #include <stdio.h>
+#include <unistd.h>
+#include <signal.h>
 
-
-int domat = 45;
-
-void func(void)
+void durma(int sayi)
 {
-	domat++;
+	write(STDOUT_FILENO, "ben durmam kardes\n", 18);
 }
+
+
 int main()
 {	
-	func();
-	printf("%d", domat);
-	return 0;
+	signal(SIGINT, durma);
+	kill(getpid(), SIGINT);
+	while (1)
+	{
+		printf("Domateslendin\n");
+		sleep(1);
+	}
+	return 1;
 }
