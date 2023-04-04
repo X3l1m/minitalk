@@ -2,15 +2,14 @@
 #include <unistd.h>
 #include "libft/src/libft.h"
 
-
 void	r_kill(int num, siginfo_t *info, void *cortex)
 {
-	(void)cortex;
-	static int	i = 0;
-	static pid_t	client_pid = 0;
+	static int				i = 0;
+	static pid_t			client_pid = 0;
 	static unsigned char	c = 0;
 
-	if(!client_pid)
+	(void)cortex;
+	if (!client_pid)
 		client_pid = info->si_pid;
 	c |= (num == SIGUSR2);
 	if (++i == 8)
@@ -30,10 +29,9 @@ void	r_kill(int num, siginfo_t *info, void *cortex)
 		c <<= 1;
 }
 
-
 int	main(void)
 {
-	struct sigaction s_act;
+	struct sigaction	s_act;
 
 	s_act.sa_sigaction = &r_kill;
 	s_act.sa_flags = SA_SIGINFO;

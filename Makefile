@@ -1,9 +1,10 @@
+####################################
 SOURCES = server.c client.c
 OBJECTS = $(SOURCES:.c=.o)
-
+####################################
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-
+####################################
 all: server client
 
 bonus: server client
