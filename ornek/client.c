@@ -53,7 +53,6 @@ int	main(int argc, char **argv)
 	ft_putstr_fd("Received: ", 1);
 	signal(SIGUSR1, action);
 	signal(SIGUSR2, action);
-	ft_putnbr_fd(getpid(), 1);
 	mt_kill(ft_atoi(argv[1]), argv[2]);
 	while (1)
 		pause();

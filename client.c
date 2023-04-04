@@ -27,20 +27,20 @@ void	s_kill(int pid, char *msg)
 	{
 		i = 8;
 		m = *msg++;
-		while (--i)
+		while (i--)
 		{
 			if (m >> i & 1)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(50);
+			usleep(100);
 		}
 	}
  	i = 8;
 	while (i--)
 	{
 		kill(pid, SIGUSR1);
-		sleep(1);
+		usleep(100);
 	}
 }
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 	write(1, "\n", 1);
 	write(1, "Recived:", 8);
 	signal(SIGUSR1, s_act);
-	signal(SIGUSR1, s_act);
+	signal(SIGUSR2, s_act);
 	s_kill(ft_atoi(argv[1]), argv[2]);
 	while (1)
 		pause();
