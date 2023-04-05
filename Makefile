@@ -10,22 +10,22 @@ all: server client
 bonus: server client
 
 server: server.o libft
-	@echo Server  creating.
+	@echo Server  creating...
 	@$(CC) -o $@ $< -Llibft -lft
 
 client: client.o libft
-	@echo Client creating.
+	@echo Client creating...
 	@$(CC) -o $@ $< -Llibft -lft
 
 %.o: %.c
 	@$(CC) -c $(CFLAGS) $?
 
 libft:
-	@echo Libft creating.
+	@echo Libft creating...
 	@make -C libft
 
 clean:
-	@echo Cleaning objects.
+	@echo Cleaning objects...
 	@rm -f $(OBJECTS)
 	@make -C libft clean
 	

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   server.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/04/05 18:15:27 by seyildir      #+#    #+#                 */
+/*   Updated: 2023/04/05 18:15:27 by seyildir      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <signal.h>
 #include <unistd.h>
 #include "libft/src/libft.h"
@@ -21,8 +33,8 @@ void	r_kill(int num, siginfo_t *info, void *cortex)
 			client_pid = 0;
 			return ;
 		}
-		write(1, &c, 1);
 		kill(client_pid, SIGUSR1);
+		write(1, &c, 1);
 		c = 0;
 	}
 	else
@@ -37,7 +49,7 @@ int	main(void)
 	s_act.sa_flags = SA_SIGINFO;
 	write(1, "Server PID: ", 12);
 	ft_putnbr_fd(getpid(), 1);
-	write(1, "\n", 1);
+	write(1, "\nWaiting for message...\n", 24);
 	sigaction(SIGUSR1, &s_act, 0);
 	sigaction(SIGUSR2, &s_act, 0);
 	while (1)
