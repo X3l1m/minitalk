@@ -6,13 +6,13 @@
 /*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/05 18:15:27 by seyildir      #+#    #+#                 */
-/*   Updated: 2023/04/05 18:15:27 by seyildir      ########   odam.nl         */
+/*   Updated: 2023/04/06 10:24:18 by seyildir      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
-#include "libft/src/libft.h"
+#include "libft/libft.h"
 
 void	r_kill(int num, siginfo_t *info, void *cortex)
 {
@@ -50,8 +50,8 @@ int	main(void)
 	write(1, "Server PID: ", 12);
 	ft_putnbr_fd(getpid(), 1);
 	write(1, "\nWaiting for message...\n", 24);
-	sigaction(SIGUSR1, &s_act, 0);
-	sigaction(SIGUSR2, &s_act, 0);
+	if (sigaction(SIGUSR1, &s_act, 0) || sigaction(SIGUSR2, &s_act, 0) == -1)
+		return (1);
 	while (1)
 		pause();
 }

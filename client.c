@@ -6,14 +6,14 @@
 /*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/05 18:15:24 by seyildir      #+#    #+#                 */
-/*   Updated: 2023/04/05 18:15:24 by seyildir      ########   odam.nl         */
+/*   Updated: 2023/04/06 10:25:33 by seyildir      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft/src/libft.h"
+#include "libft/libft.h"
 
 int	g_recived = 0;
 
@@ -53,7 +53,7 @@ void	world_end(int pid)
 	while (i--)
 	{
 		kill(pid, SIGUSR1);
-		usleep(100);
+		usleep(200);
 	}
 	sleep(3);
 	send_error(4, pid);
@@ -74,7 +74,7 @@ void	s_kill(int pid, char *msg)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			usleep(100);
+			usleep(200);
 		}
 		if (!g_recived)
 			send_error(3, 0);
