@@ -1,40 +1,49 @@
-####################################
-SOURCES = server.c client.c
-OBJECTS = $(SOURCES:.c=.o)
-####################################
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-####################################
-all: server client
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: seyildir <seyildir@student.codam.nl>         +#+                      #
+#                                                    +#+                       #
+#    Created: 2023/04/06 14:27:59 by seyildir      #+#    #+#                  #
+#    Updated: 2023/04/06 14:27:59 by seyildir      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
 
-bonus: server client
+SERVER   = server
+CLIENT   = client
+CC	     = gcc
+FLAGS    = -Wall -Werror -Wextra
+LIBS	 = -L./libft -lft
+LIBFT	 = libft.a
 
-server: server.o libft
-	@echo Server  creating...
-	@$(CC) -o $@ $< -Llibft -lft
+all : $(LIBFT) $(SERVER) $(CLIENT)
 
-client: client.o libft
-	@echo Client creating...
-	@$(CC) -o $@ $< -Llibft -lft
-
-%.o: %.c
-	@$(CC) -c $(CFLAGS) $?
-
-libft:
-	@echo Libft creating...
+$(LIBFT) : 
 	@make -C libft
 
-clean:
-	@echo Cleaning objects...
-	@rm -f $(OBJECTS)
-	@make -C libft clean
-	
+$(SERVER) : server.o
+	@$(CC) server.o $(LIBS) -o $@
+	@printf "\e[38;5;226m./$@ successfully build🥑\e[0m\n"
+
+$(CLIENT) : client.o
+	@$(CC) client.o $(LIBS) -o $@
+	@printf "\e[38;5;46m./$@ successfully build🥝\e[0m\n"
+
+%.o : %.c
+	@$(CC) $(FLAGS) $< -c -I includes
+
+clean :
+	@make clean -C libft
+	@rm -f *.o
+	@printf "\e[38;5;206m objects files deleted🚽\e[0m\n"
+
 fclean: clean
-	@rm -f server client libft/libft.a
+	@make fclean -C libft
+	@rm -f $(SERVER) $(CLIENT)
+	@printf "\e[38;5;200mBinaries deleted🗑\e[0m\n"
 
 re: fclean all
-
-.PHONY: all bonus libft clean fclean re
 
 # Siyah: \033[0;30m veya \033[30m
 # Kırmızı: \033[0;31m veya \033[31m
