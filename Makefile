@@ -6,7 +6,7 @@
 #    By: seyildir <seyildir@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/04/06 14:27:59 by seyildir      #+#    #+#                  #
-#    Updated: 2023/04/06 14:27:59 by seyildir      ########   odam.nl          #
+#    Updated: 2023/04/06 15:38:13 by seyildir      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CLIENT   = client
 CC	     = gcc
 FLAGS    = -Wall -Werror -Wextra
 LIBS	 = -L./libft -lft
-LIBFT	 = libft.a
+LIBFT	 = libft/libft.a
 
 all : $(LIBFT) $(SERVER) $(CLIENT)
 

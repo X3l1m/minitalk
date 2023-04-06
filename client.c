@@ -6,7 +6,7 @@
 /*   By: seyildir <seyildir@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/04/05 18:15:24 by seyildir      #+#    #+#                 */
-/*   Updated: 2023/04/06 10:25:33 by seyildir      ########   odam.nl         */
+/*   Updated: 2023/04/06 18:05:28 by seyildir      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	s_kill(int pid, char *msg)
 
 int	main(int argc, char **argv)
 {
+	int	i;
+
 	if (argc != 3)
 		send_error(1, 0);
 	if (!ft_strlen(argv[2]))
@@ -94,7 +96,10 @@ int	main(int argc, char **argv)
 	write(1, "Recived: ", 9);
 	signal(SIGUSR1, s_act);
 	signal(SIGUSR2, s_act);
-	s_kill(ft_atoi(argv[1]), argv[2]);
+	i = ft_atoi(argv[1]);
+	if (i <= 0 )
+		send_error(3, 0);
+	s_kill(i, argv[2]);
 	while (1)
 		pause();
 }
